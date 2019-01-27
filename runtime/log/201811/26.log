@@ -1,0 +1,126 @@
+---------------------------------------------------------------
+[ 2018-11-26T00:23:37+08:00 ] 172.17.0.1 GET 172.17.0.6/
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001057s ] mysql:host=172.17.0.1;port=3306;dbname=blog;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `article_type` [ RunTime:0.002145s ]
+[ sql ] [ SQL ] SELECT `id`,`title` FROM `article_type` WHERE  `is_delete` = 0 [ RunTime:0.000647s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `friend_link` [ RunTime:0.001629s ]
+[ sql ] [ SQL ] SELECT `cont`,`url` FROM `friend_link` WHERE  `is_delete` = 0 ORDER BY `order_no` [ RunTime:0.000545s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `article` [ RunTime:0.001528s ]
+[ sql ] [ SQL ] SELECT `id`,`title`,`see_num`,`create_time` FROM `article` `a` WHERE  `is_delete` = 0 ORDER BY `see_num` DESC LIMIT 6 [ RunTime:0.000686s ]
+[ sql ] [ SQL ] SELECT `id`,`title`,`argue_num`,`create_time` FROM `article` `a` WHERE  `is_delete` = 0 ORDER BY `argue_num` DESC LIMIT 6 [ RunTime:0.000663s ]
+---------------------------------------------------------------
+[ 2018-11-26T00:41:41+08:00 ] 172.17.0.1 GET 172.17.0.6/
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000891s ] mysql:host=172.17.0.1;port=3306;dbname=blog;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `article_type` [ RunTime:0.002029s ]
+[ sql ] [ SQL ] SELECT `id`,`title` FROM `article_type` WHERE  `is_delete` = 0 [ RunTime:0.000797s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `friend_link` [ RunTime:0.001918s ]
+[ sql ] [ SQL ] SELECT `cont`,`url` FROM `friend_link` WHERE  `is_delete` = 0 ORDER BY `order_no` [ RunTime:0.000847s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `article` [ RunTime:0.001980s ]
+[ sql ] [ SQL ] SELECT `id`,`title`,`see_num`,`create_time` FROM `article` `a` WHERE  `is_delete` = 0 ORDER BY `see_num` DESC LIMIT 6 [ RunTime:0.001048s ]
+[ sql ] [ SQL ] SELECT `id`,`title`,`argue_num`,`create_time` FROM `article` `a` WHERE  `is_delete` = 0 ORDER BY `argue_num` DESC LIMIT 6 [ RunTime:0.001079s ]
+---------------------------------------------------------------
+[ 2018-11-26T00:41:42+08:00 ] 172.17.0.1 GET 172.17.0.6/index/list?type=0&page=1
+[ sql ] [ DB ] CONNECT:[ UseTime:0.012926s ] mysql:host=172.17.0.1;port=3306;dbname=blog;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `article` [ RunTime:0.001642s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `article` `a` WHERE  `is_delete` = 0 LIMIT 1 [ RunTime:0.000586s ]
+[ sql ] [ SQL ] SELECT `id`,`user_name`,`title`,`to_top`,`pic`,`see_num`,`argue_num`,`is_best`,`create_time`,`type` FROM `article` `a` WHERE  `is_delete` = 0 ORDER BY `to_top` DESC,`create_time` DESC LIMIT 0,10 [ RunTime:0.000818s ]
+---------------------------------------------------------------
+[ 2018-11-26T03:59:16+08:00 ] 172.17.0.1 GET 172.17.0.6/detail/index?id=14
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000916s ] mysql:host=172.17.0.1;port=3306;dbname=blog;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `article_type` [ RunTime:0.001799s ]
+[ sql ] [ SQL ] SELECT `id`,`title` FROM `article_type` WHERE  `is_delete` = 0 [ RunTime:0.000707s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `article` [ RunTime:0.001594s ]
+[ sql ] [ SQL ] SELECT `id`,`user_name`,`title`,`cont`,`to_top`,`pic`,`see_num`,`argue_num`,`is_best`,`create_time`,`type_id`,`type` FROM `article` `a` WHERE  `is_delete` = 0  AND `id` = 14 LIMIT 1 [ RunTime:0.001368s ]
+---------------------------------------------------------------
+[ 2018-11-26T03:59:17+08:00 ] 172.17.0.1 GET 172.17.0.6/detail/index?id=26
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001509s ] mysql:host=172.17.0.1;port=3306;dbname=blog;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `article` [ RunTime:0.001924s ]
+[ sql ] [ SQL ] SELECT `id`,`user_name`,`title`,`cont`,`to_top`,`pic`,`see_num`,`argue_num`,`is_best`,`create_time`,`type_id`,`type` FROM `article` `a` WHERE  `is_delete` = 0  AND `id` = 26 LIMIT 1 [ RunTime:0.000957s ]
+---------------------------------------------------------------
+[ 2018-11-26T03:59:19+08:00 ] 172.17.0.1 GET 172.17.0.6/detail/index?id=6
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001396s ] mysql:host=172.17.0.1;port=3306;dbname=blog;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `article` [ RunTime:0.002464s ]
+[ sql ] [ SQL ] SELECT `id`,`user_name`,`title`,`cont`,`to_top`,`pic`,`see_num`,`argue_num`,`is_best`,`create_time`,`type_id`,`type` FROM `article` `a` WHERE  `is_delete` = 0  AND `id` = 6 LIMIT 1 [ RunTime:0.001243s ]
+[ sql ] [ SQL ] UPDATE `article`  SET `see_num` = `see_num` + 1  WHERE  `is_delete` = 0  AND `id` = 6 [ RunTime:0.080255s ]
+---------------------------------------------------------------
+[ 2018-11-26T03:59:23+08:00 ] 172.17.0.1 GET 172.17.0.6/detail/index?id=11
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001039s ] mysql:host=172.17.0.1;port=3306;dbname=blog;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `article` [ RunTime:0.001774s ]
+[ sql ] [ SQL ] SELECT `id`,`user_name`,`title`,`cont`,`to_top`,`pic`,`see_num`,`argue_num`,`is_best`,`create_time`,`type_id`,`type` FROM `article` `a` WHERE  `is_delete` = 0  AND `id` = 11 LIMIT 1 [ RunTime:0.000868s ]
+---------------------------------------------------------------
+[ 2018-11-26T03:59:28+08:00 ] 172.17.0.1 GET 172.17.0.6/detail/index?id=24
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000831s ] mysql:host=172.17.0.1;port=3306;dbname=blog;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `article` [ RunTime:0.001902s ]
+[ sql ] [ SQL ] SELECT `id`,`user_name`,`title`,`cont`,`to_top`,`pic`,`see_num`,`argue_num`,`is_best`,`create_time`,`type_id`,`type` FROM `article` `a` WHERE  `is_delete` = 0  AND `id` = 24 LIMIT 1 [ RunTime:0.000741s ]
+---------------------------------------------------------------
+[ 2018-11-26T04:54:47+08:00 ] 172.17.0.1 GET 172.17.0.6/
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000802s ] mysql:host=172.17.0.1;port=3306;dbname=blog;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `article_type` [ RunTime:0.001668s ]
+[ sql ] [ SQL ] SELECT `id`,`title` FROM `article_type` WHERE  `is_delete` = 0 [ RunTime:0.000635s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `friend_link` [ RunTime:0.001607s ]
+[ sql ] [ SQL ] SELECT `cont`,`url` FROM `friend_link` WHERE  `is_delete` = 0 ORDER BY `order_no` [ RunTime:0.000614s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `article` [ RunTime:0.001710s ]
+[ sql ] [ SQL ] SELECT `id`,`title`,`see_num`,`create_time` FROM `article` `a` WHERE  `is_delete` = 0 ORDER BY `see_num` DESC LIMIT 6 [ RunTime:0.000594s ]
+[ sql ] [ SQL ] SELECT `id`,`title`,`argue_num`,`create_time` FROM `article` `a` WHERE  `is_delete` = 0 ORDER BY `argue_num` DESC LIMIT 6 [ RunTime:0.000637s ]
+---------------------------------------------------------------
+[ 2018-11-26T08:41:54+08:00 ] 172.17.0.1 GET 172.17.0.6/
+[ sql ] [ DB ] CONNECT:[ UseTime:0.115051s ] mysql:host=172.17.0.1;port=3306;dbname=blog;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `article_type` [ RunTime:0.223984s ]
+[ sql ] [ SQL ] SELECT `id`,`title` FROM `article_type` WHERE  `is_delete` = 0 [ RunTime:0.049104s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `friend_link` [ RunTime:0.004576s ]
+[ sql ] [ SQL ] SELECT `cont`,`url` FROM `friend_link` WHERE  `is_delete` = 0 ORDER BY `order_no` [ RunTime:0.026186s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `article` [ RunTime:0.002050s ]
+[ sql ] [ SQL ] SELECT `id`,`title`,`see_num`,`create_time` FROM `article` `a` WHERE  `is_delete` = 0 ORDER BY `see_num` DESC LIMIT 6 [ RunTime:0.069222s ]
+[ sql ] [ SQL ] SELECT `id`,`title`,`argue_num`,`create_time` FROM `article` `a` WHERE  `is_delete` = 0 ORDER BY `argue_num` DESC LIMIT 6 [ RunTime:0.001164s ]
+---------------------------------------------------------------
+[ 2018-11-26T08:42:12+08:00 ] 172.17.0.1 GET 172.17.0.6/index/list?type=0&page=1
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001214s ] mysql:host=172.17.0.1;port=3306;dbname=blog;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `article` [ RunTime:0.002389s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `article` `a` WHERE  `is_delete` = 0 LIMIT 1 [ RunTime:0.059235s ]
+[ sql ] [ SQL ] SELECT `id`,`user_name`,`title`,`to_top`,`pic`,`see_num`,`argue_num`,`is_best`,`create_time`,`type` FROM `article` `a` WHERE  `is_delete` = 0 ORDER BY `to_top` DESC,`create_time` DESC LIMIT 0,10 [ RunTime:0.000996s ]
+---------------------------------------------------------------
+[ 2018-11-26T12:10:17+08:00 ] 172.17.0.1 GET 172.17.0.6/
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000948s ] mysql:host=172.17.0.1;port=3306;dbname=blog;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `article_type` [ RunTime:0.001904s ]
+[ sql ] [ SQL ] SELECT `id`,`title` FROM `article_type` WHERE  `is_delete` = 0 [ RunTime:0.000670s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `friend_link` [ RunTime:0.001642s ]
+[ sql ] [ SQL ] SELECT `cont`,`url` FROM `friend_link` WHERE  `is_delete` = 0 ORDER BY `order_no` [ RunTime:0.000525s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `article` [ RunTime:0.001584s ]
+[ sql ] [ SQL ] SELECT `id`,`title`,`see_num`,`create_time` FROM `article` `a` WHERE  `is_delete` = 0 ORDER BY `see_num` DESC LIMIT 6 [ RunTime:0.000767s ]
+[ sql ] [ SQL ] SELECT `id`,`title`,`argue_num`,`create_time` FROM `article` `a` WHERE  `is_delete` = 0 ORDER BY `argue_num` DESC LIMIT 6 [ RunTime:0.000937s ]
+---------------------------------------------------------------
+[ 2018-11-26T13:30:21+08:00 ] 172.17.0.1 GET 172.17.0.6/
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001438s ] mysql:host=172.17.0.1;port=3306;dbname=blog;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `article_type` [ RunTime:0.002594s ]
+[ sql ] [ SQL ] SELECT `id`,`title` FROM `article_type` WHERE  `is_delete` = 0 [ RunTime:0.000760s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `friend_link` [ RunTime:0.002324s ]
+[ sql ] [ SQL ] SELECT `cont`,`url` FROM `friend_link` WHERE  `is_delete` = 0 ORDER BY `order_no` [ RunTime:0.001003s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `article` [ RunTime:0.002872s ]
+[ sql ] [ SQL ] SELECT `id`,`title`,`see_num`,`create_time` FROM `article` `a` WHERE  `is_delete` = 0 ORDER BY `see_num` DESC LIMIT 6 [ RunTime:0.000947s ]
+[ sql ] [ SQL ] SELECT `id`,`title`,`argue_num`,`create_time` FROM `article` `a` WHERE  `is_delete` = 0 ORDER BY `argue_num` DESC LIMIT 6 [ RunTime:0.000903s ]
+---------------------------------------------------------------
+[ 2018-11-26T17:03:15+08:00 ] 172.17.0.1 GET 172.17.0.6/
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000787s ] mysql:host=172.17.0.1;port=3306;dbname=blog;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `article_type` [ RunTime:0.001775s ]
+[ sql ] [ SQL ] SELECT `id`,`title` FROM `article_type` WHERE  `is_delete` = 0 [ RunTime:0.000706s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `friend_link` [ RunTime:0.001999s ]
+[ sql ] [ SQL ] SELECT `cont`,`url` FROM `friend_link` WHERE  `is_delete` = 0 ORDER BY `order_no` [ RunTime:0.000700s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `article` [ RunTime:0.002102s ]
+[ sql ] [ SQL ] SELECT `id`,`title`,`see_num`,`create_time` FROM `article` `a` WHERE  `is_delete` = 0 ORDER BY `see_num` DESC LIMIT 6 [ RunTime:0.000971s ]
+[ sql ] [ SQL ] SELECT `id`,`title`,`argue_num`,`create_time` FROM `article` `a` WHERE  `is_delete` = 0 ORDER BY `argue_num` DESC LIMIT 6 [ RunTime:0.000823s ]
+---------------------------------------------------------------
+[ 2018-11-26T17:03:23+08:00 ] 172.17.0.1 GET 172.17.0.6/index/list?type=0&page=1
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001557s ] mysql:host=172.17.0.1;port=3306;dbname=blog;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `article` [ RunTime:0.002203s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `article` `a` WHERE  `is_delete` = 0 LIMIT 1 [ RunTime:0.000727s ]
+[ sql ] [ SQL ] SELECT `id`,`user_name`,`title`,`to_top`,`pic`,`see_num`,`argue_num`,`is_best`,`create_time`,`type` FROM `article` `a` WHERE  `is_delete` = 0 ORDER BY `to_top` DESC,`create_time` DESC LIMIT 0,10 [ RunTime:0.000984s ]
+---------------------------------------------------------------
+[ 2018-11-26T19:46:51+08:00 ] 172.17.0.1 GET 172.17.0.6/
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001090s ] mysql:host=172.17.0.1;port=3306;dbname=blog;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `article_type` [ RunTime:0.002183s ]
+[ sql ] [ SQL ] SELECT `id`,`title` FROM `article_type` WHERE  `is_delete` = 0 [ RunTime:0.000975s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `friend_link` [ RunTime:0.002132s ]
+[ sql ] [ SQL ] SELECT `cont`,`url` FROM `friend_link` WHERE  `is_delete` = 0 ORDER BY `order_no` [ RunTime:0.000671s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `article` [ RunTime:0.002131s ]
+[ sql ] [ SQL ] SELECT `id`,`title`,`see_num`,`create_time` FROM `article` `a` WHERE  `is_delete` = 0 ORDER BY `see_num` DESC LIMIT 6 [ RunTime:0.001039s ]
+[ sql ] [ SQL ] SELECT `id`,`title`,`argue_num`,`create_time` FROM `article` `a` WHERE  `is_delete` = 0 ORDER BY `argue_num` DESC LIMIT 6 [ RunTime:0.000872s ]
