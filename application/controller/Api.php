@@ -1,6 +1,7 @@
 <?php
 namespace app\controller;
 use app\model\Pic as picModel;
+use think\facade\Log;
 class Api{
 
     public function delPic()
@@ -28,7 +29,7 @@ class Api{
             return json(['data'=>[]]);
         }
         $picModer = new picModel();
-        $data = $picModer->field('id,pic,title')->where(['is_delete'=>0])->order('id DESC')->select();
+        $data = $picModer->field('id,pic,title,like')->where(['is_delete'=>0])->order('id DESC')->select();
         return json($data);
     }
 
@@ -103,18 +104,9 @@ class Api{
                 }
             }
         }
-        $picModer = new picModel();
-        if( $pic = $picModer->findPic( ['url'=>$url] ) ){
-            $id = $pic['id'];
-        }else{
-        	if(!empty($data)){
-	            $zero = explode('/', $data[0]);
-	            $pic = md5($title).'/'.$zero[count($zero)-1];
-	            $id  = $picModer->createPic(['url'=>$url,'title'=>($title),'pic'=>$pic,'sum'=>count($data)]);
-        	}
-        }
-        $dataStr = json_encode(['title'=>$title,'pid'=>$id,'url'=>$data]);
-        exec("curl -X POST --header 'Content-Type: application/json;charset=UTF-8' -d '$dataStr' '172.16.0.14:8080/api/getPic'");
+        $dataStr = json_encode(['title'=>urlencode($title),'url'=>$url,'urls'=>$data]);
+        Log::record($dataStr);
+        exec("curl -X POST --header 'Content-Type: application/json;charset=UTF-8' -d '$dataStr' 'pic:8080/api/getPic'");
         return json(['status'=>0,'data'=>$title]);
     }
 
@@ -175,16 +167,9 @@ class Api{
                 continue;
             }
         }
-        $picModer = new picModel();
-        if( $pic = $picModer->findPic( ['url'=>$url] ) ){
-            $id = $pic['id'];
-        }else{
-            $zero = explode('/', $data[0]);
-            $pic = md5($title).'/'.$zero[count($zero)-1];
-            $id  = $picModer->createPic(['url'=>$url,'title'=>$title,'pic'=>$pic,'sum'=>count($data)]);
-        }
-        $dataStr = json_encode(['title'=>$title,'pid'=>$id,'url'=>$data]);
-        exec("curl -X POST --header 'Content-Type: application/json;charset=UTF-8' -d '$dataStr' '172.16.0.14:8080/api/getPic'");
+        $dataStr = json_encode(['title'=>urlencode($title),'url'=>$url,'urls'=>$data]);
+        Log::record($dataStr);
+        exec("curl -X POST --header 'Content-Type: application/json;charset=UTF-8' -d '$dataStr' 'pic:8080/api/getPic'");
         return json(['status'=>0,'data'=>$title]);
     }
 }

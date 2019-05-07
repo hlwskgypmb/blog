@@ -60,8 +60,7 @@ class Url extends Dispatch
             $controller = !empty($path) ? array_shift($path) : null;
         }
 
-        //getshell漏洞
-        if ($controller && !preg_match('/^[A-Za-z](\w|\.)*$/', $controller)) {
+        if ($controller && !preg_match('/^[A-Za-z][\w|\.]*$/', $controller)) {
             throw new HttpException(404, 'controller not exists:' . $controller);
         }
 
@@ -121,7 +120,9 @@ class Url extends Dispatch
 
         $host = $this->request->host(true);
 
-        if ($this->rule->getRouter()->getName($name, $host) || $this->rule->getRouter()->getName($name2, $host)) {
+        $method = $this->request->method();
+
+        if ($this->rule->getRouter()->getName($name, $host, $method) || $this->rule->getRouter()->getName($name2, $host, $method)) {
             return true;
         }
 

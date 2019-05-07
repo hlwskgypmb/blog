@@ -108,6 +108,9 @@ function getTitle($title=''){
 	$title = str_replace('title>', '', $title);
 	$title = str_replace('&lt;/title', '', $title);
 	$title = str_replace('</title', '', $title);
+    $title = str_replace("游民星空", "", $title);
+    $title = str_replace("_", "", $title);
+    $title = str_replace("GamerSky.com", "", $title);
 	return $title;
 }
 
