@@ -60,7 +60,7 @@ class Pic extends Basic
         $list = [];
         $page = input('?page')?input('page'):1;
         $size = 10;
-        $path = '/static/image';
+        $path = '/static/images';
         $file = scandir('.'.$path);
         foreach ($file as $k => $v) {
             if($v == '.' || $v == '..'){

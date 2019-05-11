@@ -169,10 +169,25 @@
     }
   });
 
-   function getType(file){
-        var filename=file;
-        var type=filename.substring(filename.lastIndexOf("."),filename.length);
-        return type;
-    }
+  function getType(file){
+    var filename=file;
+    var type=filename.substring(filename.lastIndexOf("."),filename.length);
+    return type;
+  }
+
+  $(function(){
+    $(window).scroll(function() {
+      var scrollTop = $(this).scrollTop();
+      var scrollHeight = $(document).height();
+      var windowHeight = $(this).height();
+      if(scrollTop == 0){
+        // alert('触顶');
+      }
+      if(scrollTop + windowHeight == scrollHeight  ){
+        // alert('下拉到底了');
+        $('#container').pinto();
+      }
+    })
+  })
 });
 </script>

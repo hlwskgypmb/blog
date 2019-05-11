@@ -2,6 +2,8 @@
 namespace app\controller;
 use think\Controller;
 use app\model\Article;
+use app\model\Access;
+
 class Basic extends Controller
 {
 	protected $data = [];	//返回数据主体
@@ -16,6 +18,7 @@ class Basic extends Controller
         }else{
             $this->data['is_login'] = false;
         }
+        Access::saveIp();
 	}
 
     public function checkLogin()
