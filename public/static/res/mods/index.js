@@ -401,41 +401,52 @@ layui.define(['layer','laypage','code', 'laytpl', 'form', 'upload','element', 'u
     var socket = new WebSocket('ws://swoole.tudan.net.cn');
     //连接成功时触发
     socket.onopen = function(){
-      //socket.send('XXX连接成功');
-      layim.config({
-          init: {
-            //url: '/im/getInit' //接口地址（返回的数据格式见下文）
-            // ,type: 'get' //默认get，一般可不填
-            // ,data: {} //额外参数
-          }
-          ,brief: true //是否简约模式（如果true则不显示主面板）
-          ,notice: true
-          ,mine: {
-            avatar: avatar        //我的头像
-            ,content: "你好吗"     //消息内容
-            ,id: id               //我的id
-            ,mine: true           //是否我发送的消息
-            ,username: "游客"+id  //我的昵称
-          }
-          //获取群员接口（返回的数据格式见下文）
-          ,members: {
-            url: '/im/getMembers' //接口地址（返回的数据格式见下文）
-            ,type: 'get' //默认get，一般可不填
-            ,data: {} //额外参数
-          }
-          //上传图片接口（返回的数据格式见下文），若不开启图片上传，剔除该项即可
-          ,uploadImage: {
-            url: '/im/uploadImage' //接口地址
-            ,type: 'post' //默认post
-          }
-        }).chat({
-          name: '广场'
-          ,type: 'group' //群组类型
-          ,avatar: '/static/image/group.png'
-          ,id: 1 //定义唯一的id方便你处理信息
-          ,members: 0 //成员数，不好获取的话，可以设置为0
-      });
-      layim.setChatMin(); //收缩聊天面板
+	    socket.send(JSON.stringify({
+			type: 'ping' //心跳
+			,data: ''
+		}));
+      	//socket.send('XXX连接成功');
+		layim.config({
+		  init: {
+		    //url: '/im/getInit' //接口地址（返回的数据格式见下文）
+		    // ,type: 'get' //默认get，一般可不填
+		    // ,data: {} //额外参数
+		  }
+		  ,brief: true //是否简约模式（如果true则不显示主面板）
+		  ,notice: true
+		  ,mine: {
+		    avatar: avatar        //我的头像
+		    ,content: "你好吗"     //消息内容
+		    ,id: id               //我的id
+		    ,mine: true           //是否我发送的消息
+		    ,username: "游客"+id  //我的昵称
+		  }
+		  //获取群员接口（返回的数据格式见下文）
+		  ,members: {
+		    url: '/im/getMembers' //接口地址（返回的数据格式见下文）
+		    ,type: 'get' //默认get，一般可不填
+		    ,data: {} //额外参数
+		  }
+		  //上传图片接口（返回的数据格式见下文），若不开启图片上传，剔除该项即可
+		  ,uploadImage: {
+		    url: '/im/uploadImage' //接口地址
+		    ,type: 'post' //默认post
+		  }
+		}).chat({
+			name: '广场'
+			,type: 'group' //群组类型
+			,avatar: '/static/image/group.png'
+			,id: 1 //定义唯一的id方便你处理信息
+			,members: 0 //成员数，不好获取的话，可以设置为0
+		});
+		layim.setChatMin(); //收缩聊天面板
+		//心跳
+		setInterval(function(){
+		  socket.send(JSON.stringify({
+		    type: 'ping' //心跳
+		    ,data: ''
+		  }));
+		}, 10000);
     };
     //监听收到的消息
     socket.onmessage = function(res){
@@ -443,11 +454,14 @@ layui.define(['layer','laypage','code', 'laytpl', 'form', 'upload','element', 'u
       if(res.type === 'message'){
         msg =JSON.parse(res.data);
         if(msg.type != 'pong'){
-      		console.log(msg);
+      		//console.log(msg);
          	layim.getMessage(msg); //res.data即你发送消息传递的数据（阅读：监听发送的消息）
          	//手动消息提醒
          	$('#layui-layim-min').children('span').html('收到新消息！')
          	$('#layui-layim-min').children('img').attr('src',msg.avatar)
+        }else{
+        	console.log(msg);
+        	$("#onLine").html(msg.data);
         }
       }
       //res为接受到的值，如 {"emit": "messageName", "data": {}}
@@ -483,14 +497,6 @@ layui.define(['layer','laypage','code', 'laytpl', 'form', 'upload','element', 'u
         ,data: res
       }));
     })
-
-    //心跳
-    setInterval(function(){
-      socket.send(JSON.stringify({
-        type: 'ping' //心跳
-        ,data: ''
-      }));
-    }, 10000);
   }
 
   //右下角固定Bar
