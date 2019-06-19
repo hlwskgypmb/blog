@@ -4,50 +4,50 @@ use app\model\Pic as picModel;
 use think\facade\Log;
 class Api{
 
-    public function delPic()
-    {
-        if(!input('?key') || input('key')!='3571'){
-            return json(['data'=>[]]);
-        }
-        $picModer = new picModel();
-        $picModer->del(['id'=>input('id')]);
-        return json(['status'=>0]);
-    }
+    // public function delPic()
+    // {
+    //     if(!input('?key') || input('key')!='3571'){
+    //         return json(['data'=>[]]);
+    //     }
+    //     $picModer = new picModel();
+    //     $picModer->del(['id'=>input('id')]);
+    //     return json(['status'=>0]);
+    // }
 
-    public function delPicDetail()
-    {
-        if(!input('?key') || input('key')!='3571'){
-            return json(['data'=>[]]);
-        }
-        $picModer = new picModel();
-        $picModer->delDetail(['id'=>input('id')]);
-        return json(['status'=>0]);
-    }
+    // public function delPicDetail()
+    // {
+    //     if(!input('?key') || input('key')!='3571'){
+    //         return json(['data'=>[]]);
+    //     }
+    //     $picModer = new picModel();
+    //     $picModer->delDetail(['id'=>input('id')]);
+    //     return json(['status'=>0]);
+    // }
 
-    public function getPicList(){
-        if(!input('?key') || input('key')!='3571'){
-            return json(['data'=>[]]);
-        }
-        $picModer = new picModel();
-        $data = $picModer->field('id,pic,title,like')->where(['is_delete'=>0])->order('id DESC')->select();
-        return json($data);
-    }
+    // public function getPicList(){
+    //     if(!input('?key') || input('key')!='3571'){
+    //         return json(['data'=>[]]);
+    //     }
+    //     $picModer = new picModel();
+    //     $data = $picModer->field('id,pic,title,like')->where(['is_delete'=>0])->order('id DESC')->select();
+    //     return json($data);
+    // }
 
-    public function getPicDetail(){
-        if(!input('?key') || input('key')!='3571'){
-            return json(['data'=>[]]);
-        }
-        $picModer = new picModel();
-        $data = $picModer->getDetailList(['pid'=>input('id')]);
-        $res = [];
-        foreach ($data as $k => $v) {
-        	$res[] =[
-        		'url'=>preg_match('/gamersky/', $v['url']) ? "http://pic.tudan.net.cn/base".$v['src'] : "http://pic.tudan.net.cn/mid".$v['src'],
-        		'id'=>$v['id']
-        	];;
-        }
-        return json($res);
-    }
+    // public function getPicDetail(){
+    //     if(!input('?key') || input('key')!='3571'){
+    //         return json(['data'=>[]]);
+    //     }
+    //     $picModer = new picModel();
+    //     $data = $picModer->getDetailList(['pid'=>input('id')]);
+    //     $res = [];
+    //     foreach ($data as $k => $v) {
+    //     	$res[] =[
+    //     		'url'=>preg_match('/gamersky/', $v['url']) ? "http://pic.tudan.net.cn/base".$v['src'] : "http://pic.tudan.net.cn/mid".$v['src'],
+    //     		'id'=>$v['id']
+    //     	];;
+    //     }
+    //     return json($res);
+    // }
 
 	public function upload($host='/static/file/',$path='./static/file/')
 	{

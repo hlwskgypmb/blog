@@ -7,7 +7,7 @@
     
  */
  
-layui.define(['layer', 'laytpl', 'upload'], function(exports){
+layui.define(['layer', 'laytpl', 'upload','face'], function(exports){
   
   var v = '2.0.92';
   var $ = layui.jquery;
@@ -32,13 +32,13 @@ layui.define(['layer', 'laytpl', 'upload'], function(exports){
   LAYIM.prototype.config = function(options){
     var skin = [];
     layui.each(Array(4), function(index){
-      //skin.push(layui.cache.dir+'css/modules/layim/skin/'+ (index+1) +'.jpg')
+      skin.push(layui.cache.dir+'css/modules/layim/skin/'+ (index+1) +'.jpg')
         // if("undefined" != typeof chrome){
         //     var imgURL = chrome.extension.getURL('images/skin/'+ (index+1) +'.jpg');
         // }else{
             var imgURL = 'resource://oscim-at-vitas/data/images/skin/'+ (index+1) +'.jpg';
-        //}
-        skin.push(imgURL)
+        // }
+        skin.push(imgURL);
     });
     options = options || {};
     options.skin = options.skin || [];
@@ -1075,7 +1075,7 @@ layui.define(['layer', 'laytpl', 'upload'], function(exports){
       // if("undefined" != typeof chrome){
       //     arr[item] = chrome.extension.getURL('images/face/'+ index + '.gif');
       // }else{
-          arr[item] = 'resource://oscim-at-vitas/data/images/face/'+ index + '.gif';
+          arr[item] = '/static/face/'+ index + '.gif';
       //}
     });
     return arr;
@@ -1088,7 +1088,7 @@ layui.define(['layer', 'laytpl', 'upload'], function(exports){
           // if("undefined" != typeof chrome){
           //     arr[index] = chrome.extension.getURL('images/face/'+ index + '.gif');
           // }else{
-              arr[index] = 'resource://oscim-at-vitas/data/images/face/'+ index + '.gif';
+              arr[index] = '/static/face/'+ index + '.gif';
           //}
       });
       return arr;

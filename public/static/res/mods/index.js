@@ -394,110 +394,109 @@ layui.define(['layer','laypage','code', 'laytpl', 'form', 'upload','element', 'u
   }
 
   //加载IM
-  if(!device.android && !device.ios){
-    var avatar = '/static/image/face'+Math.floor(Math.random()*6 + 1)+'.jpg';
-    var id =  (new Date()).getTime();
-    
-    var socket = new WebSocket('ws://swoole.tudan.net.cn');
-    //连接成功时触发
-    socket.onopen = function(){
-	    socket.send(JSON.stringify({
-			type: 'ping' //心跳
-			,data: ''
-		}));
-      	//socket.send('XXX连接成功');
-		layim.config({
-		  init: {
-		    //url: '/im/getInit' //接口地址（返回的数据格式见下文）
-		    // ,type: 'get' //默认get，一般可不填
-		    // ,data: {} //额外参数
-		  }
-		  ,brief: true //是否简约模式（如果true则不显示主面板）
-		  ,notice: true
-		  ,mine: {
-		    avatar: avatar        //我的头像
-		    ,content: "你好吗"     //消息内容
-		    ,id: id               //我的id
-		    ,mine: true           //是否我发送的消息
-		    ,username: "游客"+id  //我的昵称
-		  }
-		  //获取群员接口（返回的数据格式见下文）
-		  ,members: {
-		    url: '/im/getMembers' //接口地址（返回的数据格式见下文）
-		    ,type: 'get' //默认get，一般可不填
-		    ,data: {} //额外参数
-		  }
-		  //上传图片接口（返回的数据格式见下文），若不开启图片上传，剔除该项即可
-		  ,uploadImage: {
-		    url: '/im/uploadImage' //接口地址
-		    ,type: 'post' //默认post
-		  }
-		}).chat({
-			name: '广场'
-			,type: 'group' //群组类型
-			,avatar: '/static/image/group.png'
-			,id: 1 //定义唯一的id方便你处理信息
-			,members: 0 //成员数，不好获取的话，可以设置为0
-		});
-		layim.setChatMin(); //收缩聊天面板
-		//心跳
-		setInterval(function(){
-		  socket.send(JSON.stringify({
-		    type: 'ping' //心跳
-		    ,data: ''
-		  }));
-		}, 10000);
-    };
-    //监听收到的消息
-    socket.onmessage = function(res){
-      //res = JSON.parse(res);
-      if(res.type === 'message'){
-        msg =JSON.parse(res.data);
-        if(msg.type != 'pong'){
-      		//console.log(msg);
-         	layim.getMessage(msg); //res.data即你发送消息传递的数据（阅读：监听发送的消息）
-         	//手动消息提醒
-         	$('#layui-layim-min').children('span').html('收到新消息！')
-         	$('#layui-layim-min').children('img').attr('src',msg.avatar)
-        }else{
-        	console.log(msg);
-        	$("#onLine").html(msg.data);
-        }
-      }
-      //res为接受到的值，如 {"emit": "messageName", "data": {}}
-      //emit即为发出的事件名，用于区分不同的消息
-    };
-    //监听发送的消息
-    layim.on('sendMessage', function(res){
-      res.mine.avatar = avatar;
-      res.mine.mine = false;
-      //console.log(res);
-      var mine = res.mine; //包含我发送的消息及我的信息
-      //mine的结构如下：
-      // {
-      //   avatar: "avatar.jpg" //我的头像
-      //   ,content: "你好吗" //消息内容
-      //   ,id: "100000" //我的id
-      //   ,mine: true //是否我发送的消息
-      //   ,username: "纸飞机" //我的昵称
-      // }
-      var to = res.to; //对方的信息
-      //to的结构如下：
-      // {
-      //   avatar: "avatar.jpg"
-      //   ,id: "100001"
-      //   ,name: "贤心"
-      //   ,sign: "这些都是测试数据，实际使用请严格按照该格式返回"
-      //   ,type: "friend" //聊天类型，一般分friend和group两种，group即群聊
-      //   ,username: "贤心"
-      // }
-      //监听到上述消息后，就可以轻松地发送socket了，如：
-      socket.send(JSON.stringify({
-        type: 'chatMessage' //随便定义，用于在服务端区分消息类型
-        ,data: res
-      }));
-    })
-  }
+  // if(!device.android && !device.ios){
+  //   var avatar = '/static/image/face'+Math.floor(Math.random()*6 + 1)+'.jpg';
+  //   var id =  (new Date()).getTime();
+  //   var socket = new WebSocket('ws://swoole.tudan.net.cn');
+  //   //连接成功时触发
+  //   socket.onopen = function(){
+	 //    socket.send(JSON.stringify({
+		// 	type: 'ping' //心跳
+		// 	,data: ''
+		// }));
+  //     	//socket.send('XXX连接成功');
+		// layim.config({
+		//   init: {
+		//     //url: '/im/getInit' //接口地址（返回的数据格式见下文）
+		//     // ,type: 'get' //默认get，一般可不填
+		//     // ,data: {} //额外参数
+		//   }
+		//   ,brief: true //是否简约模式（如果true则不显示主面板）
+		//   ,notice: true
+		//   ,mine: {
+		//     avatar: avatar        //我的头像
+		//     ,content: "你好吗"     //消息内容
+		//     ,id: id               //我的id
+		//     ,mine: true           //是否我发送的消息
+		//     ,username: "游客"+id  //我的昵称
+		//   }
+		//   //获取群员接口（返回的数据格式见下文）
+		//   ,members: {
+		//     url: '/im/getMembers' //接口地址（返回的数据格式见下文）
+		//     ,type: 'get' //默认get，一般可不填
+		//     ,data: {} //额外参数
+		//   }
+		//   //上传图片接口（返回的数据格式见下文），若不开启图片上传，剔除该项即可
+		//   ,uploadImage: {
+		//     url: '/im/uploadImage' //接口地址
+		//     ,type: 'post' //默认post
+		//   }
+		// }).chat({
+		// 	name: '广场'
+		// 	,type: 'group' //群组类型
+		// 	,avatar: '/static/image/group.png'
+		// 	,id: 1 //定义唯一的id方便你处理信息
+		// 	,members: 0 //成员数，不好获取的话，可以设置为0
+		// });
+		// layim.setChatMin(); //收缩聊天面板
+		// //心跳
+		// setInterval(function(){
+		//   socket.send(JSON.stringify({
+		//     type: 'ping' //心跳
+		//     ,data: ''
+		//   }));
+		// }, 10000);
+  //   };
+  //   //监听收到的消息
+  //   socket.onmessage = function(res){
+  //     //res = JSON.parse(res);
+  //     if(res.type === 'message'){
+  //       msg =JSON.parse(res.data);
+  //       if(msg.type != 'pong'){
+  //     		//console.log(msg);
+  //        	layim.getMessage(msg); //res.data即你发送消息传递的数据（阅读：监听发送的消息）
+  //        	//手动消息提醒
+  //        	$('#layui-layim-min').children('span').html('收到新消息！')
+  //        	$('#layui-layim-min').children('img').attr('src',msg.avatar)
+  //       }else{
+  //       	//console.log(msg);
+  //       	$("#onLine").html(msg.data);
+  //       }
+  //     }
+  //     //res为接受到的值，如 {"emit": "messageName", "data": {}}
+  //     //emit即为发出的事件名，用于区分不同的消息
+  //   };
+  //   //监听发送的消息
+  //   layim.on('sendMessage', function(res){
+  //     res.mine.avatar = avatar;
+  //     res.mine.mine = false;
+  //     //console.log(res);
+  //     var mine = res.mine; //包含我发送的消息及我的信息
+  //     //mine的结构如下：
+  //     // {
+  //     //   avatar: "avatar.jpg" //我的头像
+  //     //   ,content: "你好吗" //消息内容
+  //     //   ,id: "100000" //我的id
+  //     //   ,mine: true //是否我发送的消息
+  //     //   ,username: "纸飞机" //我的昵称
+  //     // }
+  //     var to = res.to; //对方的信息
+  //     //to的结构如下：
+  //     // {
+  //     //   avatar: "avatar.jpg"
+  //     //   ,id: "100001"
+  //     //   ,name: "贤心"
+  //     //   ,sign: "这些都是测试数据，实际使用请严格按照该格式返回"
+  //     //   ,type: "friend" //聊天类型，一般分friend和group两种，group即群聊
+  //     //   ,username: "贤心"
+  //     // }
+  //     //监听到上述消息后，就可以轻松地发送socket了，如：
+  //     socket.send(JSON.stringify({
+  //       type: 'chatMessage' //随便定义，用于在服务端区分消息类型
+  //       ,data: res
+  //     }));
+  //   })
+  // }
 
   //右下角固定Bar
   util.fixbar({

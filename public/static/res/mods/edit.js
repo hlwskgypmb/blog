@@ -60,6 +60,7 @@ layui.define(['layer','form','code'], function(exports){
     ,layEditor: function(options,argue=0){
       var html = '<div class="fly-edit">'
         +'<span type="b" title="加粗"><i class="layui-icon" style="font-size:14px">&#xe62b;</i>加粗</span>'
+        +'<span type="red" title="红色"><i class="layui-icon" style="font-size:14px">&#xe639;</i>红色</span>'
         +'<span type="hr" title="水平线"><i class="iconfont icon-charushuipingxian"></i>换行</span>'
         +'<span type="face" title="插入表情"><i class="iconfont icon-biaoqing"></i>表情</span>'
         +'<span type="table" title="表格"><i class="layui-icon" style="font-size:14px">&#xe62d;</i>表格</span>'
@@ -71,6 +72,7 @@ layui.define(['layer','form','code'], function(exports){
       if(argue!=0){
         html = '<div class="fly-edit">'
           +'<span type="b" title="加粗"><i class="layui-icon" style="font-size:14px">&#xe62b;</i>加粗</span>'
+          +'<span type="red" title="红色"><i class="layui-icon" style="font-size:14px">&#xe639;</i>红色</span>'
           +'<span type="hr" title="水平线"><i class="iconfont icon-charushuipingxian"></i>换行</span>'
           +'<span type="face" title="插入表情"><i class="iconfont icon-biaoqing"></i>表情</span>'
           +'<span type="code" title="插入代码"><i class="iconfont icon-daima"></i>代码</span>'
@@ -205,6 +207,17 @@ layui.define(['layer','form','code'], function(exports){
     			val = txt.toString();
     			layui.focusInsert(editor[0], '[strong]'+ val + '[/strong][br]\n');
         }
+        ,red: function(editor){ //红色
+          editor.focus();
+          var val =  '';
+          if(document.selection) {
+            txt = document.selection.createRange().text;
+          } else {
+            txt = document.getSelection();
+          }
+          val = txt.toString();
+          layui.focusInsert(editor[0], '[red]'+ val + '[/red]');
+        }
         ,hr: function(editor){ //插入水平分割线
           layui.focusInsert(editor[0], '[hr]\n');
         }
@@ -249,7 +262,7 @@ layui.define(['layer','form','code'], function(exports){
     ,content: function(content){
       //支持的html标签
       var html = function(end){
-        return new RegExp('\\['+ (end||'') +'(pre|hr|br|strong|div|table|thead|th|tbody|tr|td|ul|li|ol|li|dl|dt|dd|h2|h3|h4|h5)\\]\\n*', 'g');
+        return new RegExp('\\['+ (end||'') +'(pre|hr|br|strong|div|table|thead|th|tbody|tr|td|ul|li|ol|li|dl|dt|dd|h2|h3|h4|h5|red)\\]\\n*', 'g');
       };
       content = edit.escape(content||'') //XSS
       .replace(/img\[([^\s]+?)\]/g, function(img){  //转义图片
@@ -281,6 +294,10 @@ layui.define(['layer','form','code'], function(exports){
         return cont;
       })
       .replace(/\n/g, '<br>') //转义换行
+      .replace(/<red>.*?<\/red>/g, function(str){ //转义red
+        return str.replace(/<red>/g,'<span style="color: #FF5722">')
+              .replace(/<\/red>/g,'<\/span>');
+      })
       .replace(/<br><table>/g,'<table class="layui-table">') //调整table
       .replace(/<pre>.*?<\/pre>/g, function(str){ //转义code 行号
         return str.replace(/<pre>/g,'<pre class="layui-code">')
